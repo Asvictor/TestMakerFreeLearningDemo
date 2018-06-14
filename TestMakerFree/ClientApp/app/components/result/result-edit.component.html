@@ -1,0 +1,88 @@
+﻿<div class="result-edit">
+    <h2>{{title}}</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group"
+             [ngClass]="{ 'has-error has-feedback' : hasError('Text') } ">
+            <label for="text">Result text:</label>
+            <br />
+            <textarea id="text"
+                      formControlName="Text" required
+                      class="form-control"
+                      placeholder="enter a suitable text..."></textarea>
+            <span *ngIf="hasError('Text')"
+                  class="glyphicon glyphicon-remove form-control-feedback"
+                  aria-hidden="true"></span>
+            <div *ngIf="hasError('Text')"
+                 class="help-block">
+                Text is a required field: please insert a valid Text.
+            </div>
+        </div>
+        <div class="form-group"
+             [ngClass]="{ 'has-error has-feedback' : hasError('MinValue') }">
+            <label for="MinValue">Minimum Score Value:</label>
+            <br />
+            <input type="text" id="MinValue" name="MinValue"
+                   formControlName="MinValue"
+                   class="form-control" />
+            <span *ngIf="hasError('MinValue')"
+                  class="glyphicon glyphicon-remove form-control-feedback"
+                  aria-hidden="true"></span>
+            <div *ngIf="hasError('MinValue')"
+                 class="help-block">
+                Insert a numeric value, or leave it blank to match everything
+                up to MaxValue.
+            </div>
+        </div>
+        <div class="form-group"
+             [ngClass]="{ 'has-error has-feedback' : hasError('MaxValue') }">
+            <label for="MaxValue">Maximum Score Value:</label>
+            <br />
+            <input type="text" id="MaxValue" name="MaxValue"
+                   formControlName="MaxValue"
+                   class="form-control" />
+            <span *ngIf="hasError('MaxValue')"
+                  class="glyphicon glyphicon-remove form-control-feedback"
+                  aria-hidden="true"></span>
+            <div *ngIf="hasError('MaxValue')"
+                 class="help-block">
+                Insert a numeric value, or leave it blank to match everything
+                up to MinValue.
+            </div>
+        </div>
+        <button *ngIf="editMode" type="submit"
+                class="btn btn-success">
+            <span class="glyphicon glyphicon-edit"></span>
+            Apply Changes
+        </button>
+        <button *ngIf="!editMode" type="submit"
+                class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create the Result!
+        </button>
+        <button (click)="onBack()" type="submit"
+                class="btn btn-default">
+            <span class="glyphicon glyphicon-remove"></span>
+            Cancel
+        </button>
+    </form>
+    <!--<div class="form-group">
+        <button *ngIf="editMode"
+                (click)="onSubmit(result)"
+                class="btn btn-warning">
+            <span class="glyphicon glyphicon-edit"></span>
+            Apply Changes
+        </button>
+        <button *ngIf="!editMode"
+                (click)="onSubmit(result)"
+                class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span>
+            Create the Result!
+        </button>
+        <button (click)="onBack()"
+                class="btn btn-default">
+            Cancel
+        </button>
+    </div>-->
+    <result-list *ngIf="editMode" [quiz]="quiz"></result-list>
+
+</div>
